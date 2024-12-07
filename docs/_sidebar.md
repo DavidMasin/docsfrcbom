@@ -1,4 +1,4 @@
-- [Home](/)
+- [Home](getStarted)
 - [Introduction](introduction.md)
 
 **BOM Overview**

@@ -58,14 +58,15 @@ Here’s a simplified breakdown:
 1. **CAD Design in Onshape:**
     - Design your robot in Onshape as usual.
     - Ensure all parts are properly named and configured.
-
-2. **Fetch BOM Data:**
+2. **Use the custom FeatureScript**
+   - In each of you Part Studios to set the processes needed for each part.
+3. **Fetch BOM Data:**
     - Use the system to fetch BOM data from Onshape using API keys.
 
-3. **Production Tracking:**
+4. **Production Tracking:**
     - Update part quantities as they move through the production process (Pre-Process, Process 1, Process 2).
 
-4. **Assembly and Final Check:**
+5. **Assembly and Final Check:**
     - Once all parts are marked as completed, the system shows which parts are ready for assembly.
 
 ---

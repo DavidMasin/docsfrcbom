@@ -1,4 +1,4 @@
-![logo](./assets/images/frcbomlogo.png)
+![logo](./assets/images/frcbomlogo1.png)
 
 # FRC BOM Docs
 

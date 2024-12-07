@@ -11,19 +11,19 @@ Welcome to the FRC BOM System! This guide will help you get started using the pl
 ### **📋 Step 1: Register Your Team**
 
 1. **Navigate to the Website**  
-   Open the website [frcbom](https://frcbom.com/#signInForm) in your preferred browser.
+   Open the website [frcbom.com](https://frcbom.com/#signInForm) in your preferred browser.
 
 2. **Click "Register"**
-    - On the login page, click the **Register** button to create an account.
+   - On the login page, click the **Register** button to create an account.
 
 3. **Enter Team Details**
-    - **Team Number:** Enter your official FRC team number.
-    - **Password:** Choose a strong password for your team.
-    - **Admin Password:** Choose a strong password for your team's admin account.
+   - **Team Number:** Enter your official FRC team number.
+   - **Password:** Choose a strong password for your team.
+   - **Admin Password:** Choose a strong password for your team's admin account.
 
 4. **Submit Registration**
-    - Click **Register** to create your team account.
-    - ✅ A success message will appear upon successful registration.
+   - Click **Register** to create your team account.
+   - ✅ A success message will appear upon successful registration.
 
 ---
 
@@ -33,12 +33,12 @@ Welcome to the FRC BOM System! This guide will help you get started using the pl
    Visit the login page at [frcbom.com](https://frcbom.com/#signInForm).
 
 2. **Enter Credentials**
-    - **Team Number:** Enter your registered team number.
-    - **Password:** Enter your account password. (either User or Admin)
+   - **Team Number:** Enter your registered team number.
+   - **Password:** Enter your account password (either User or Admin).
 
 3. **Click "Log In"**
-    - Upon successful login, you will be redirected to your team-specific dashboard:  
-      `frcbom.com/{team_number}` OR `frcbom.com/{team_number}/Admin` (if logged in with an Admin account) 
+   - Upon successful login, you will be redirected to your team-specific dashboard:  
+     `frcbom.com/{team_number}` OR `frcbom.com/{team_number}/Admin` (if logged in with an Admin account).
 
 ---
 
@@ -57,30 +57,54 @@ After logging in, you’ll see the main dashboard where you can manage your BOM 
 ---
 
 ### **📦 Step 4: Managing Your BOM**
-#### **1. Fetch BOM from Onshape - TEAM ADMIN ONLY**
-1. Write you new Robot's name.
-2. Click OK
-3. You will be redirected to
-   `frcbom.com/{team_number}/Admin/{robot_name}`
+
+#### **1. Create a New Robot - TEAM ADMIN ONLY**
+1. Enter your new robot's name.
+2. Click **OK**.
+3. You will be redirected to:  
+   `frcbom.com/{team_number}/Admin/{robot_name}`.
+
 ---
-#### **2. Fetch BOM from Onshape - TEAM ADMIN ONLY**
+
+#### **2. Use the Custom FeatureScript in Onshape**
+Before fetching your BOM, you **must use the custom FeatureScript in Onshape** to set the processes for each part.
+
+1. **Add the Custom FeatureScript:**
+   - In your Onshape CAD document, add the FRC BOM FeatureScript from this document, [setProcesses](https://cad.onshape.com/documents/2ab53c1cecf1cb8d258c9308/w/d6c4bbfad44d288bc9cdc221/e/c0f603bee2bd62b76af7d8ac), and this FeatureScript (to set materials, not necessary) - [SetMaterials](https://cad.onshape.com/documents/2ab53c1cecf1cb8d258c9308/w/d6c4bbfad44d288bc9cdc221/e/c0f603bee2bd62b76af7d8ac).
+
+2. **Set the Processes:**
+   - Open the BOM FeatureScript in your Onshape assembly.
+   - For each part, set the following processes:
+      - **Pre-Process** (if needed)
+      - **Process 1** (main process, e.g., CNC, Lathe, 3D Printing)
+      - **Process 2** (secondary process if applicable)
+
+3. **Save and Update:**
+   - Save your Onshape document after defining processes.
+   - This will allow the BOM system to read the correct processes when fetching your BOM.
+
+> **Need help adding the FeatureScript?** Check out the [FeatureScript Setup Guide](FeatureScriptSetup.md).
+
+---
+
+#### **3. Fetch BOM from Onshape - TEAM ADMIN ONLY**
 
 1. Click **Settings** in the header.
 2. Enter the following details:
 
-    - **Onshape Document URL:** Link to your Onshape document.
-    - **Access Key:** Your Onshape API access key.
-    - **Secret Key:** Your Onshape API secret key.
+   - **Onshape Document URL:** Link to your Onshape document.
+   - **Access Key:** Your Onshape API access key.
+   - **Secret Key:** Your Onshape API secret key.
 
 3. Click **Fetch BOM**.
 
 > **Note:** This action retrieves BOM data from Onshape and displays it in the BOM table.
-> 
-> **Having trouble generating Onshape API code?** Visit this [link](onshapeAPI.md)
+
+> **Having trouble generating Onshape API keys?** Visit this [link](onshapeAPI.md).
 
 ---
 
-#### **3. Viewing and Filtering Parts**
+#### **4. Viewing and Filtering Parts**
 
 Use the filter buttons in the **Dashboard Controls** section to view specific parts:
 
@@ -97,9 +121,9 @@ Use the filter buttons in the **Dashboard Controls** section to view specific pa
 
 ---
 
-#### **4. Managing Part Quantities**
+#### **5. Managing Part Quantities**
 
-Each part (In House) in the BOM has quantity counters for the following stages:
+Each part (In-House only) in the BOM has quantity counters for the following stages:
 
 - **Pre-Process Quantity**
 - **Process 1 Quantity**
@@ -108,18 +132,18 @@ Each part (In House) in the BOM has quantity counters for the following stages:
 **To Update Quantities:**
 
 1. Click the part you want to update.
-2. Click the `+` or `-` buttons next to a part’s process field.
-2. The BOM updates automatically and saves data locally and on the server.
+2. Use the `+` or `-` buttons next to the part’s process field.
+3. The BOM updates automatically and saves data locally and on the server.
 
 ---
 
-### **💾 Step 5: Saving Your Progress**
+### **💾 Step 6: Saving Your Progress**
 
 Your BOM data is saved automatically whenever you update it.
 
 ---
 
-### **🔓 Step 6: Logging Out**
+### **🔓 Step 7: Logging Out**
 
 1. Click **Log Out** in the header.
 2. This action clears your session and returns you to the login page.
