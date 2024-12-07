@@ -1,0 +1,13 @@
+/* Example: increase font size for headings, custom colors */
+h1, h2, h3, h4 {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: #2f4f4f;
+}
+
+a {
+    color: #2f76b7;
+}
+
+.navbar {
+    background-color: #f2f2f2;
+}

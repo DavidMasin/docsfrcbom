@@ -2,21 +2,39 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="description" content="Description">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FRC BOM Documentation</title>
+  <!-- Docsify theme -->
+  <link rel="stylesheet" href="//unpkg.com/docsify/themes/vue.css">
+  <!-- Custom CSS (optional) -->
+  <link rel="stylesheet" href="./assets/css/custom.css">
 </head>
 <body>
-  <div id="app"></div>
-  <script>
-    window.$docsify = {
-      name: '',
-      repo: ''
+<div id="app"></div>
+
+<!-- Docsify configuration -->
+<script>
+  window.$docsify = {
+    name: 'FRC BOM Docs',
+    logo: './assets/images/team_logo.png',
+    loadSidebar: true,
+    loadNavbar: true,
+    coverpage: true,
+    subMaxLevel: 3,
+    auto2top: true,
+    ga: '', // Add your Google Analytics tracking code if needed
+    search: {
+      maxAge: 86400000, // Expiration time, 1 day
+      placeholder: 'Search...',
+      noData: 'No results found!'
     }
-  </script>
-  <!-- Docsify v4 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  }
+</script>
+
+<!-- Docsify CDN -->
+<script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+<!-- Optional: Docsify Plugins -->
+<script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
+<script src="//unpkg.com/docsify-copy-code/dist/docsify-copy-code.js"></script>
 </body>
 </html>
