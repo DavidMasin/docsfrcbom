@@ -1,12 +1,12 @@
 - [Home](/)
-- [Introduction](docs/introduction.md)
+- [Introduction](introduction.md)
 
 **BOM Overview**
-- [BOM Summary](docs/bom_overview.md)
-- [Mechanical Components](docs/mechanical_components.md)
-- [Electrical Components](docs/electrical_components.md)
-- [Pneumatics](docs/pneumatics.md)
-- [Software and Controls](docs/software_and_controls.md)
+- [BOM Summary](bom_overview.md)
+- [Mechanical Components](mechanical_components.md)
+- [Electrical Components](electrical_components.md)
+- [Pneumatics](pneumatics.md)
+- [Software and Controls](software_and_controls.md)
 
 **Additional Resources**
 - [Team Website](https://yourteamwebsite.example.com)
