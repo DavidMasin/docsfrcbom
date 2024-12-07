@@ -2,7 +2,7 @@
 
 # FRC BOM Docs
 
-> Complete documentation of our robot's Bill of Materials.
+> Complete documentation FRCBOM.com.
 
-[Get Started](README.md)
-[GitHub](https://github.com/YourTeam/YourFRCProject)
+[Get Started](getStarted)
+
