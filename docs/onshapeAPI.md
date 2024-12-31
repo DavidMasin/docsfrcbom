@@ -18,50 +18,22 @@ To connect the FRC BOM System to your Onshape CAD models, you need to generate A
 
 ---
 
-## **Step 2: Creating a New API Application**
+## **Step 2: Creating a New API Keys**
 
-1. **Click "Create New Application":**
-    - On the Developer Portal dashboard, click the **"Create New Application"** button.
+1. **Click "API Keys":**
+    - On the Developer Portal dashboard, click the **"API Keys"** button.
 
-2. **Enter Application Details:**
-    - **Application Name:** Enter a descriptive name, such as "FRC BOM Integration".
-    - **OAuth Type:** Choose **"API Keys"**.
-    - **Description:** Provide a brief description (optional).
+2. **Create new:**
+    - **Click "Create new API keys"**
 
-3. **Click "Create Application":**
-    - Your new application will be created, and you will be redirected to the application management page.
+
+
+3. **Select all permissions**
 
 ---
 
-## **Step 3: Generating API Keys**
-
-1. **Navigate to the API Keys Tab:**
-    - In your application management view, click the **"API Keys"** tab.
-
-2. **Click "Create API Key":**
-    - Click the **"Create API Key"** button.
-
-3. **Copy and Save the Keys:**
-    - You will see two keys:
-        - **Access Key**
-        - **Secret Key**
 
 > ⚠️ **Important:** Copy these keys and store them securely. You won’t be able to view the **Secret Key** again once you leave this page.
-
----
-
-## **Step 4: Setting Permissions**
-
-1. **Navigate to the "Permissions" Tab:**
-    - In your application management page, click the **"Permissions"** tab.
-
-2. **Add Required Permissions:**
-    - Select the following permissions:
-        - **Read Documents:** Allow the application to access your Onshape CAD documents.
-        - **Read Assemblies:** Allow access to the parts and assemblies in your documents.
-
-3. **Save Permissions:**
-    - Click **"Save"** to apply the permissions.
 
 ---
 ## **Troubleshooting Tips**
