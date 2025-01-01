@@ -88,7 +88,7 @@ Before fetching your BOM, you **must use the custom FeatureScript in Onshape** t
 ---
 
 #### **3. Fetch BOM from Onshape - TEAM ADMIN ONLY**
-> :warning:  DO NOT FETCH IN THE "Main" SYSTEM!
+> :warning:  I suggest not fetching into the "Main" System!
 1. Select the system you want to fetch into the BOM
 2. Click **Settings** in the header.
 2. Enter the following details:

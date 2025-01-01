@@ -2,7 +2,7 @@
 
 # FRC BOM Docs
 
-> Complete documentation FRCBOM.com.
+> Complete documentation FRCBOM.com
 
 [Get Started](getStarted)
 
