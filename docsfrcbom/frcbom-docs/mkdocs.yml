@@ -1,0 +1,73 @@
+site_name: FRCBOM — User Guide
+site_url: https://docs.frcbom.com
+repo_url: https://github.com/your-org/frcbom-docs
+edit_uri: ""
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.sections
+    - navigation.tabs
+    - content.code.copy
+    - toc.follow
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: blue
+    - scheme: slate
+      primary: indigo
+      accent: blue
+plugins:
+  - search
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: timeago
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - footnotes
+  - tables
+  - def_list
+  - attr_list
+  - md_in_html
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji
+nav:
+  - Home: index.md
+  - Setup (UI only):
+    - Overview: setup/overview.md
+    - Accounts & Roles: setup/roles.md
+    - Register your team: setup/register-team.md
+    - Sign in & out: setup/sign-in.md
+    - Create your first robot: setup/create-robot.md
+    - Add systems: setup/add-systems.md
+    - Add machines: setup/add-machines.md
+    - Link to Onshape (in UI): setup/link-onshape.md
+    - Verify your setup: setup/verify.md
+  - Using FRCBOM:
+    - The team dashboard: usage/team-dashboard.md
+    - Robot page: usage/robot-page.md
+    - System BOM screen: usage/system-bom.md
+    - Filters & material tools: usage/filters-materials.md
+    - Editing progress (quantities): usage/editing-progress.md
+    - Downloading CAD: usage/downloading-cad.md
+    - 3D viewer: usage/3d-viewer.md
+    - System dashboard & “Now manufacturing”: usage/system-dashboard.md
+    - Common workflows: usage/workflows.md
+  - Admin (in the website):
+    - Change system settings: admin/system-settings.md
+    - Rename systems & thumbnails: admin/rename-thumbnails.md
+    - Manage machines & formats: admin/machines-formats.md
+    - Passwords & access: admin/passwords-access.md
+  - Reference:
+    - What the columns mean: reference/bom-columns.md
+    - Part status logic: reference/status-logic.md
+    - File formats by machine: reference/file-formats.md
+    - Glossary: reference/glossary.md
+  - Troubleshooting: troubleshooting.md
+  - FAQ: faq.md
+  - Changelog (user-facing): changelog.md
