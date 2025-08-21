@@ -22,7 +22,7 @@ const config = {
           routeBasePath: '/',            // docs at site root
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: undefined,
-          showLastUpdateTime: true,
+          showLastUpdateTime: false,
           showLastUpdateAuthor: false,
         },
         blog: false,
