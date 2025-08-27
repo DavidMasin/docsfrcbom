@@ -1,2 +1,9 @@
-:root { --ifm-color-primary: #2563eb; }
-.hero__title { font-weight: 800; }
+:root {
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+.hero--primary {
+  background: linear-gradient(135deg, #111827, #1f2937);
+}
+.hero__title, .hero__subtitle {
+  color: #e5e7eb !important;
+}

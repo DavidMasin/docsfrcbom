@@ -1,6 +1,16 @@
----
-title: FRCBOM User Docs
----
-Welcome! This guide teaches you how to use **frcbom.com** to plan, manufacture, and track your robot’s Bill of Materials (BOM).
+# FRCBOM Docs
 
-If this is your first time, start with **Setup → Overview**.
+This repository contains the official documentation for **FRCBOM**,
+an Onshape‑integrated BOM & manufacturing flow for FRC teams.
+
+## Quick Start
+
+```bash
+npm i
+npm run start   # local dev at http://localhost:3000
+npm run build   # outputs ./build
+npm run serve   # serve the build locally
+```
+
+If you see a Docusaurus error about `url` or `baseUrl`, make sure your
+`docusaurus.config.js` has both values set. This template already does.

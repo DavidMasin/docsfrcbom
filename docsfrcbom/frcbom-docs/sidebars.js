@@ -1,57 +1,31 @@
-// sidebars.js
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
-  docs: [
-    // 👇 This line makes the / (index.md) page show the left sidebar
-    'index',
-
+  tutorialSidebar: [
     {
       type: 'category',
-      label: 'Setup (Start Here)',
+      label: 'Getting Started',
       collapsed: false,
       items: [
-        'setup/overview',
-        'setup/register-team',
-        'setup/verify',
-        'setup/roles',
-        'setup/sign-in',
-        'setup/create-robot',
-        'setup/add-systems',
-        'setup/add-machines',
-        'setup/link-onshape',
+        'intro',
+        'setup/accounts-and-roles',
+        'setup/onshape-classroom-properties',
+        'setup/bom-template',
+        'setup/fs-and-settings'
       ],
     },
     {
       type: 'category',
-      label: 'Using the Site',
-      collapsed: false,
+      label: 'Using FRCBOM',
       items: [
-        'usage/team-dashboard',
-        'usage/robot-page',
-        'usage/system-dashboard',
-        'usage/system-bom',
-        'usage/editing-progress',
-        'usage/filters-materials',
-        'usage/3d-viewer',
-        'usage/downloading-cad',
-        'usage/workflows',
+        'using/create-robot-and-systems',
+        'using/bom-dashboard',
+        'using/system-dashboard',
+        'using/3d-viewer',
+        'using/subassemblies',
+        'using/download-cad',
+        'using/real-time-collab'
       ],
-    },
-    {
-      type: 'category',
-      label: 'Reference',
-      collapsed: true,
-      items: [
-        'reference/glossary',
-        'reference/bom-columns',
-        'reference/status-logic',
-        'reference/file-formats',
-      ],
-    },
-    'faq',
-    'troubleshooting',
-    'changelog',
-  ],
+    }],
 };
 
-export default sidebars;
+module.exports = sidebars;
