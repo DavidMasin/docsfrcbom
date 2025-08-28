@@ -55,8 +55,6 @@ nav:
     - Filters & material tools: usage/filters-materials.md
     - Editing progress (quantities): usage/editing-progress.md
     - Downloading CAD: usage/downloading-cad.md
-    - 3D viewer: usage/3d-viewer.md
-    - System dashboard & “Now manufacturing”: usage/system-dashboard.md
     - Common workflows: usage/workflows.md
   - Admin (in the website):
     - Change system settings: admin/system-settings.md

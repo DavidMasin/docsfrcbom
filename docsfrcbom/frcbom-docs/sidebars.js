@@ -18,9 +18,6 @@ const sidebars = {
       label: 'Using FRCBOM',
       items: [
         'using/create-robot-and-systems',
-        'using/bom-dashboard',
-        'using/system-dashboard',
-        'using/3d-viewer',
         'using/subassemblies',
         'using/download-cad',
         'using/real-time-collab'
