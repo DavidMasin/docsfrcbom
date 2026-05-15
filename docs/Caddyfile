@@ -1,0 +1,14 @@
+# Railway assigns a dynamic $PORT. Caddy must bind to it for the edge
+# proxy to reach the app, otherwise you get "Application failed to respond".
+{
+    auto_https off
+    admin off
+    persist_config off
+}
+
+:{$PORT:8080} {
+    root * /app
+    encode gzip
+    try_files {path} {path}/ /index.html
+    file_server
+}
