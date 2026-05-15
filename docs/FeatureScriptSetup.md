@@ -1,141 +1,123 @@
-### If any assistance is needed, contact me @DavidMasin in Cheif Delphi (you can DM me)
-# Onshape Setup for Importing BOM (Educator License)
+# FeatureScript Setup (Manual)
 
-This guide walks you through creating custom properties in Onshape for managing Bill of Materials (BOM) data and setting up a BOM template. These properties will be useful for capturing manufacturing/pre-processing steps and materials. This setup is particularly helpful when exporting to an FRC-oriented BOM workflow.
+This page documents the **classroom / manual** approach where you create custom properties yourself, hand-author the FeatureScript, and apply a BOM template.
 
----
+> **Most teams should use the auto-generated FeatureScript instead** — see [Auto-Generated FeatureScript →](autoFeatureScript.md). It does everything below in one click without touching Onshape settings.
 
-## 1. Access Classroom Settings
-
-1. Log in to your Onshape ADMIN **Educator** account.
-2. Open your **Classroom** 
-3. Click the gear icon or navigate to **Settings** to access the configuration options.
+Use the manual approach if:
+- You don't have an Educator/Enterprise account and can't create classroom-level properties via the auto-flow.
+- You want full control over property names / categories.
+- You already have an existing FRC team Onshape with custom properties you'd like to keep.
 
 ---
 
-## 2. Create Custom Properties
+## 1. Open your Onshape company / classroom settings
 
-1. In the **Settings** menu, select **Properties** on the left-hand tab.
-2. Click the **Create custom property** button.
-
-Each custom property will have:
-- **Name** (the key used in the BOM and within Onshape)
-- **Type** (e.g., string, list, etc.)
-- **List of values** (if applicable)
-- **Category** (e.g., Part, Assembly, Drawing, etc.)
-
-### Example: `Pre Process`
-
-- **Property Name:** `Pre Process`
-- **Type:** List
-- **Values:**
-   - `Jigsaw`
-   - `Saw`
-- **Category:** `Part` (ensures this property applies to Part objects)
-
-Click **Create** or **Save** when done.
+1. Log in to your Onshape **Educator** (or **Enterprise**) account that owns the team's documents.
+2. Open the **Classroom / Company** the documents live under.
+3. Click the gear icon → **Settings**.
 
 ---
 
-### Repeat for `Process 1` and `Process 2`
+## 2. Create the custom properties
 
-Follow the same steps to create two more custom properties, `Process 1` and `Process 2`. These will have the same list of values but can be used to indicate separate operations if needed.
+Open **Properties** in the left rail and click **Create custom property** for each:
 
-- **Property Name:** `Process 1`
-   - **Type:** List
-   - **Values:**
-      - `Lathe`
-      - `CNC`
-      - `Printer3D`
-      - `Mill`
-      - `Welding`
-      - `Riveting`
-      - `Sanding`
-      - `PowderCoat`
-   - **Category:** `Part`
-
-- **Property Name:** `Process 2`
-   - **Type:** List
-   - **Values:**
-      - `Lathe`
-      - `CNC`
-      - `Printer3D`
-      - `Mill`
-      - `Welding`
-      - `Riveting`
-      - `Sanding`
-      - `PowderCoat`
-   - **Category:** `Part`
-
-> **Tip:** These properties can capture the primary and secondary manufacturing processes for each part.
-
----
-
-### Add `BOM Material` Property
-
-Finally, create a `BOM Material` property to track the material used in each part. There are two approaches:
-
-1. **Type: String** – A free-text field where team members can type any material name.
-2. **Type: List** – A predefined list of materials to standardize your entries.
-
-#### Example Using a List
-
-- **Property Name:** `BOM Material`
-- **Type:** List
-- **Values:**
-   - `Aluminum 6061`
-   - `Steel`
-   - `Polycarbonate`
-   - `ABS Plastic`
-   - `Plywood`
+### Pre Process
+- **Name:** `Pre Process`
+- **Type:** `List`
 - **Category:** `Part`
+- **Values:** match your shop, e.g. `Jigsaw`, `Saw`, `Drilling`
+
+### Process 1 and Process 2
+- **Name:** `Process 1` / `Process 2`
+- **Type:** `List`
+- **Category:** `Part`
+- **Values:** `Lathe`, `CNC`, `Printer3D`, `Mill`, `Welding`, `Riveting`, `Sanding`, `PowderCoat` (or whatever your shop uses)
+
+### BOM Material
+- **Name:** `BOM Material`
+- **Type:** `List` (or `String` if you want free text)
+- **Category:** `Part`
+- **Values:** `Aluminum 6061`, `Steel`, `Polycarbonate`, `ABS Plastic`, `Plywood`, …
+
+> ⚠️ Anyone in your classroom can see and use these properties. Use stable, generic names.
+
+After creating all four, copy each property's **ID** — you'll paste them into FRC BOM as **Custom Property IDs** so the generated FS writes to the same fields. See [Custom Property IDs →](propertyIds.md).
 
 ---
 
-## 3. Create a BOM Template
+## 3. (Optional) Build a BOM template
 
-After setting up the custom properties, do the following:
+A BOM template makes the columns appear in your assemblies:
 
-1. Go to the **Preferences** tab in your Onshape settings.
-2. Select **Create BOM Template**.
-3. Choose which columns to include in the template. A recommended set is:
-   - **Item**
-   - **Name**
-   - **Quantity**
-   - **Description**
-   - **Material**
-   - **Mass**
-   - **Vendor**
-   - **BOM Material**
-   - **Pre Process**
-   - **Process 1**
-   - **Process 2**
+1. **Preferences → BOM Templates → Create BOM Template**.
+2. Add the columns: `Item`, `Name`, `Quantity`, `Description`, `Material`, `Mass`, `Vendor`, `BOM Material`, `Pre Process`, `Process 1`, `Process 2`.
+3. Name it `FRC BOM Template`.
 
-You can name this template however you like (e.g., `FRC BOM Template`).
+Apply it to an assembly via the BOM panel → **Apply BOM Template**.
 
 ---
 
-## 4. Apply the BOM Template
+## 4. Drop the FeatureScript into Onshape
 
-Once you have created your BOM template:
+If you're not using the auto-generator, copy the two open-source FRCBOM scripts:
 
-1. Open the **document** you want to import/export (the one where you’ve created the parts using these custom properties).
-2. Use the **Material and Processes FeatureScript** (FS).
-   - **Important:** To use this FeatureScript, you **must make a copy** of it into your own Onshape environment.
-   - After that, you need to change the IDs of the properties. You can access them in the **Properties** tab that we set up before to ensure the FS references the correct fields.
-3. In the **Assembly** workspace, click the **BOM** button.
-4. Click **Apply BOM Template** and select the BOM template you created (e.g., `FRC BOM Template`).
+- **setProcesses** – assigns Pre Process / Process 1 / Process 2 to a part.
+- **setMaterial**  – assigns the BOM Material to a part.
 
-Your BOM should now display the custom columns (`Pre Process`, `Process 1`, `Process 2`, `BOM Material`, etc.) with the data you entered in the properties.
-> ⚠️ Anyone from your classroom will see that BOM template and can Apply it themselves!
----
+The reference document lives at:
+**<https://cad.onshape.com/documents/2ab53c1cecf1cb8d258c9308/w/d6c4bbfad44d288bc9cdc221/e/c0f603bee2bd62b76af7d8ac>**
 
-## 5. Verify and Maintain
+To use them:
 
-1. **Verify** the newly created BOM to ensure the values from custom properties (Pre Process, Process 1, etc.) appear correctly.
-2. **Maintain** these properties moving forward so team members have a consistent record of processes, materials, and other part metadata.
+1. Open the document → **File → Make a copy → To my Onshape**.
+2. In the copy, open each FeatureStudio tab.
+3. Replace the four property IDs at the top of the script with **your** IDs from step 2.
 
 ---
 
+## 5. Apply the features in your Part Studios
 
-By following these steps, your FRC team will have a streamlined process for generating BOMs directly from Onshape, ensuring compliance, clarity, and better collaboration.
+In each Part Studio:
+
+1. Click **+** → **Custom feature** → pick **set Processes**.
+2. Select the part(s) → set Pre Process / Process 1 / Process 2.
+3. Click **+** → **set Material**. Select the part(s) → pick a material.
+
+When you fetch the BOM, FRC BOM reads these values from the Onshape custom-property fields the script writes.
+
+---
+
+## 6. Verify
+
+1. Apply your BOM template to the assembly.
+2. The columns `Pre Process`, `Process 1`, `Process 2`, `BOM Material` should be populated.
+3. Open FRC BOM → fetch the BOM. You should see the values in the part cards.
+
+---
+
+## 7. Maintain
+
+- When you add a new machine in your shop, edit the **list values** on the corresponding property (Pre Process, Process 1, Process 2).
+- When you add a new material, edit **BOM Material**.
+- Re-apply your features on parts that should use the new values.
+
+---
+
+## Why the auto-flow is easier
+
+The auto-generator ([Auto-Generated FeatureScript](autoFeatureScript.md)) takes your **machines** and **materials** lists from FRC BOM and writes a complete FeatureStudio that:
+
+- Lists categories you defined
+- Uses the property IDs you pasted
+- Updates in-place every time you change the machine/material lists
+
+You only edit lists in one place (FRC BOM); the FS regenerates on demand.
+
+---
+
+**Next:**
+- [Auto-Generated FeatureScript →](autoFeatureScript.md)
+- [Custom Property IDs →](propertyIds.md)
+- [Onshape API Keys →](onshapeAPI.md)

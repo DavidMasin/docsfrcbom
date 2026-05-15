@@ -1,127 +1,107 @@
-# **FRC BOM System - Team Dashboard Overview**
+# Team Dashboard (User View)
+
+URL: `/{team_number}`
+
+This is the page everyone on your team lands on after signing in with the **user** password. It's a read + update view — perfect for builders running CNCs, lathes, or the 3D-printer farm.
 
 ---
 
-## **Introduction**
+## Difference vs. Admin
 
-The **Team Dashboard** is the central hub where your team can manage the Bill of Materials (BOM) for your robot's manufacturing process. This document explains the layout, functionality, and features available in the Team Dashboard.
+| Capability                       | User | Admin |
+|----------------------------------|------|-------|
+| See robots & systems             | ✅   | ✅    |
+| Open the 3D viewer               | ✅   | ✅    |
+| Update part progress (+/-)       | ✅   | ✅    |
+| Download CAD for a part          | ✅   | ✅    |
+| Filter / search the BOM          | ✅   | ✅    |
+| Edit system settings             | ❌   | ✅    |
+| Add / delete manual parts        | ❌   | ✅    |
+| Soft-delete & restore BOM rows   | ❌   | ✅    |
+| Fetch BOM from Onshape           | ❌   | ✅    |
+| Order Mode + Vendor CSV export   | ❌   | ✅    |
+| Change team configuration        | ❌   | ✅    |
 
----
-
-## **Accessing the Dashboard**
-
-- After logging in, your team will be redirected to your **Team Dashboard URL**:  
-  `frcbom.com/{team_number}`
-
-
----
-
-## **Dashboard Layout Overview**
-
-The Team Dashboard has three main sections:
-
-| **Section**             | **Description**               |
-|-------------------------|---------------------------------|
-| **Header**              | Displays team info and logout. |
-| **Dashboard Controls**  | Provides filters|
-| **BOM Table**           | Displays the parts list.      |
+> The role is determined by which password you used to sign in (`is_team_admin` claim in the JWT). To switch, log out and sign back in with the other password.
 
 ---
 
-## **1. Header Section**
+## Layout
 
-The header is located at the top of the page and includes:
-
-- **Team Name and Number:** Displays your registered team number.
-- **Logout Button:** Logs the current user out and returns them to the login screen.
-
----
-
-## **2. Dashboard Controls**
-
-The Dashboard Controls section includes various tools for managing parts and accessing key features.
-
-### **Available Controls:**
-
-### **🔎 Filter Buttons**
-
-| **Button**             | **Function**                          |
-|-----------------------|------------------------------------------|
-| **Show All**           | Displays all robot parts.              |
-| **Show In-House**      | Displays only in-house parts.          |
-| **Show COTS**          | Displays only COTS parts.              |
-| **CNC**                | Filters parts requiring CNC machining. |
-| **Lathe**              | Filters parts requiring lathe work.    |
-| **3D Printer**         | Filters parts for 3D printing.         |
-| **Gerung**             | Filters parts needing cutting.         |
-| **Mill**               | Filters parts needing milling.         |
-
-### **Choose the system:**
-- Use the system selector in the top-left corner of the screen to change the System. Main will show all the systems combined
----
-
-
-## **3. BOM Table**
-
-The BOM Table is the core section of the Team Dashboard. It lists all parts with detailed information.
+| Section            | What it shows                                                       |
+|--------------------|---------------------------------------------------------------------|
+| Header             | Team name & number, logout button                                   |
+| Robot card grid    | One card per robot — same layout as the admin view                  |
+| Robot detail page  | Shows the system list of the chosen robot (no add/delete buttons)   |
+| System BOM page    | Parts grid (cards), filters, material download                      |
 
 ---
 
-### **Table Columns**
+## Robot card
 
-| **Column Name**           | **Description**                 |
-|---------------------------|-----------------------------------|
-| **Part Name**             | The official part name.         |
-| **Description**           | A description of the part.      |
-| **Material BOM**          | The material used for the part. |
-| **Quantity Required**     | The number of parts needed.     |
-| **Pre-Process**           | Preparation steps, if required. |
-| **Pre-Process Quantity**  | Current quantity completed.     |
-| **Process 1**             | The main production process.    |
-| **Process 1 Quantity**    | Quantity completed in Process 1.|
-| **Process 2**             | The secondary production process|
-| **Process 2 Quantity**    | Quantity completed in Process 2.|
+Each card is clickable. The card thumbnail is, in priority order:
+
+1. The robot's Onshape main-assembly thumbnail (if set by the admin)
+2. The uploaded `Robot Schematic` image
+3. A neutral placeholder
+
+Clicking a card opens `/{team_number}/{robot_name}` — the user-facing robot view, which lists the systems.
 
 ---
 
-### **Table Interactions**
+## System BOM (user)
 
-1. **Click on a Part:**
-    - Opens the **Part Details View**, where you can:
-        - Edit quantities.
-        - Update processes.
+URL: `/{team_number}/{robot_name}/{system}`
 
-2. **Adjust Quantities:**
-    - Use the `+` and `-` buttons to adjust quantities in real time.
+You see the parts grid for that system. Available controls:
 
-3. **Automatic Saving:**
-    - All changes are automatically saved and synced with the server.
+### Filters
+- **All Parts** — every row in the BOM
+- **COTS** — purchased parts
+- **In-House** — manufactured parts
 
----
+### Material
+- **Filter by Material** — narrow the grid to one material.
+- **Download All Material** — pick a material, grab every CAD file of that material at once. Files queue in the bell icon (top-right).
 
+### Per-part actions
+- **+ / − counters** on Pre-Process, Process 1, Process 2 (where applicable for in-house parts).
+- **Download CAD** — pick a format (STEP / STL / GLTF / x_t). The bell icon shows in-flight downloads.
+- **View 3D model** — opens a viewer modal for that part.
+- Click the card body to open the **part detail** view.
 
-## **Best Practices**
+> What you cannot do as a user: fetch BOM, add or delete parts, edit machines/materials, or change Onshape keys.
 
-1. **Regularly Update Quantities:**
-    - Ensure part quantities are updated after each manufacturing step.
+### Live updates
+The page is connected via Socket.IO. When anyone — admin or user — updates a counter, every other browser viewing the same system updates within ~200 ms. No refresh needed.
 
-2. **Check Filter Views:**
-    - Use filters to ensure no part is left behind.
-
-3. **Verify Onshape Integration:**
-    - Ensure processes are properly set in Onshape using the custom FeatureScript.
-
----
-
-## **What’s Next?**
-
-Explore other sections of the documentation to learn about more advanced features:
-
-- [Getting Started](GettingStarted.md)
-- [FeatureScript Setup](FeatureScriptSetup.md)
-- [Onshape API Integration](onshapeAPI.md)
+### Confetti
+When a part hits its target quantity, a celebration modal appears on the robot dashboard. See [Dashboards →](dashboards.md).
 
 ---
 
-**Happy Building! 🚀**  
-**~ The FRC BOM Team**  
+## Main view
+
+URL: `/{team_number}/{robot_name}/Main`
+
+The pseudo-system that aggregates parts from every system in the robot. It's read-mostly for users:
+
+- All filters work
+- Material filter + bulk download work
+- Counters work (the underlying part is updated in its real system)
+- COTS Order Mode is admin-only
+
+The Main view is a great place to do "where is this part across the robot?" lookups.
+
+---
+
+## Logout
+
+Click **Logout** in the header. This clears your JWT cookie and returns you to the landing page.
+
+---
+
+**Next:**
+- [Tracking Parts →](trackingParts.md)
+- [3D Viewer & CAD Download →](viewer.md)
+- [Robot & System Dashboards →](dashboards.md)

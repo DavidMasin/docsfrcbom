@@ -1,115 +1,96 @@
-### If any assistance is needed, contact me @DavidMasin in Cheif Delphi (you can DM me)
+# Introduction
 
-## **Introduction**
+> Need help? DM **@DavidMasin** on Chief Delphi.
 
-The FRC BOM System is designed to simplify the manufacturing management process for FRC teams by offering an intuitive platform for tracking robot parts from CAD models to the final product. This platform bridges the gap between design and production, ensuring that every component needed for your robot is accounted for, processed, and completed efficiently.
+## What is FRC BOM?
 
----
+**FRC BOM** is a free, web-based Bill of Materials and manufacturing manager built specifically for FRC robotics teams. It bridges your Onshape CAD models and your shop floor so you always know:
 
-## **Why Use the FRC BOM System?**
+- What parts the robot needs
+- What's been made, ordered, or installed
+- Who's working on what right now
+- What's blocking the next subsystem
 
-Building a competitive FRC robot is a complex process involving multiple stages, from CAD design to machining, assembly, and final testing. The FRC BOM System helps streamline this process by:
-
-- **Centralizing Part Information:** Manage all parts from your Onshape CAD models in one organized location.
-- **Tracking Production Progress:** Know which parts are ready and which are still in progress.
-- **Improving Team Collaboration:** Allow different team members to focus on specific processes, such as CNC, 3D Printing, or assembly.
-- **Minimizing Errors:** Reduce costly manufacturing errors by ensuring every part follows the correct process flow.
+The platform is hosted at **[frcbom.com](https://frcbom.com)** and is free to use for every team.
 
 ---
 
-## **Key Features**
+## Why teams use it
 
-### 📦 **Bill of Materials Management**
-- Automatically fetch BOM data from Onshape CAD documents.
-- Organize and display all parts required for your robot’s construction.
-- Track part details such as name, material, required quantity, and production steps.
+Build season is chaotic. A spreadsheet falls behind the moment someone edits CAD. FRC BOM solves that with:
 
-### 🛠️ **Production Process Tracking**
-- Monitor production progress with clear stages:
-    - **Pre-Process**
-    - **Process 1**
-    - **Process 2**
-
-- Update part completion with simple `+` and `-` quantity buttons.
-
-### 🔍 **Filtering and Sorting**
-- Filter parts based on different criteria:
-    - All parts
-    - In-house manufactured parts
-    - Commercial off-the-shelf (COTS) parts
-    - By specific processes like CNC, 3D Printing, Lathe, etc.
-
-### 📊 **Visual Dashboard**
-- A visually intuitive dashboard provides quick access to parts requiring action.
-- Large filter buttons and an organized BOM table ensure easy navigation.
-
-### 🔒 **Secure Account Management**
-- Each FRC team has a unique account.
-- Secure login system with JWT tokens ensures that data is protected.
+- **One-click BOM import** from any Onshape assembly (including subassemblies with quantity multipliers).
+- **Multiple robots** per team (practice bot, competition bot, off-season, archive).
+- **Multiple systems** per robot (Drivetrain, Intake, Elevator, etc.) plus an automatic **Main** view that aggregates them all.
+- **Manual parts** for things that aren't in CAD (spares, raw stock, custom orders).
+- **Process tracking** with three configurable stages: Pre-Process → Process 1 → Process 2.
+- **Real-time updates** — when a teammate hits “+1” on a CNC part, every other browser shows it instantly (Socket.IO).
+- **3D assembly viewer** in the browser (no Onshape login required for non-admins).
+- **CAD downloads** in STEP, STL, GLTF, or x_t directly from the parts list.
+- **FRCTools Orders integration** to group COTS parts by vendor and export ready-to-order CSVs.
+- **Auto-generated FeatureScript** that writes a customized Material & Processes Feature into your Onshape folder.
+- **Demo mode** — spin up a fully functional throw-away team in one click.
 
 ---
 
-## **How It Works**
+## Core concepts
 
-The FRC BOM System integrates with Onshape to retrieve and display a complete Bill of Materials (BOM). Once the BOM is fetched, team members can track the manufacturing progress of each part in real time.
-
-Here’s a simplified breakdown:
-
-1. **CAD Design in Onshape:**
-    - Design your robot in Onshape as usual.
-    - Ensure all parts are properly named and configured.
-2. **Use the custom FeatureScript**
-   - In each of you Part Studios to set the processes needed for each part.
-3. **Fetch BOM Data:**
-    - Use the system to fetch BOM data from Onshape using API keys.
-
-4. **Production Tracking:**
-    - Update part quantities as they move through the production process (Pre-Process, Process 1, Process 2).
-
-5. **Assembly and Final Check:**
-    - Once all parts are marked as completed, the system shows which parts are ready for assembly.
+| Concept           | What it is                                                                                            |
+|-------------------|--------------------------------------------------------------------------------------------------------|
+| **Team**          | Your FRC team account, identified by team number. Has a User password and an Admin password.          |
+| **Robot**         | A physical build (e.g. *Valkyrie 2025*). One team can have many robots.                               |
+| **System**        | A subsystem of a robot (e.g. *Intake*, *Elevator*). Each system points to one Onshape assembly.       |
+| **Main**          | An auto-generated pseudo-system that aggregates every part across all real systems of a robot.        |
+| **BOM**           | The flat list of parts for a system — pulled live from Onshape and persisted with progress.           |
+| **Manual Part**   | A part you add by hand inside FRC BOM (not in Onshape). Lives next to imported parts.                 |
+| **Process**       | A manufacturing stage. Up to three are tracked per part: **Pre-Process**, **Process 1**, **Process 2**. |
+| **Machine**       | A shop resource (CNC, Mill, Lathe, 3D Printer…) bound to a stage and a default CAD format.           |
+| **Material**      | A material name, grouped under a category (Sheet, Tube, Bar…). Reorderable.                           |
+| **Demo Team**     | An auto-expiring team (24h) anyone can create to evaluate the product.                                |
+| **Global Admin**  | The super-user account (team number `0000`, admin password) that can manage every team.               |
 
 ---
 
-## **Who Can Benefit from This System?**
+## How it works end-to-end
 
-The FRC BOM System is designed for **FRC Robotics Teams** of all sizes. It is especially useful for teams that:
-
-- Manufacture custom robot parts using tools like CNC machines, 3D printers, lathes, and mills.
-- Use Onshape for CAD design.
-- Want a better way to track and manage their robot’s BOM.
-- Are looking for a tool that simplifies project management and reduces manufacturing errors.
-
----
-
-## **How Is It Different from Other Systems?**
-
-Unlike spreadsheets or manual tracking, the FRC BOM System offers:
-
-- **Automated Data Retrieval:** Parts are imported directly from Onshape.
-- **Interactive UI:** An intuitive dashboard with clickable filters and action buttons.
-- **Process Integration:** Built specifically with FRC manufacturing processes in mind (CNC, 3D Printing, Lathe, etc.).
-- **Collaborative Team Management:** Allows multiple team members to update and track part progress simultaneously.
+1. **Register your team** (team number, name, user password, admin password) — or click *Try a Demo*.
+2. **Configure team settings**: add machines, list materials, paste Onshape API keys.
+3. (Recommended) **Generate the FeatureStudio** so Onshape exposes the correct dropdowns and IDs.
+4. **Create a robot** and add **systems** for each subassembly.
+5. **Fetch the BOM** for each system — FRC BOM walks subassemblies and applies quantity multipliers.
+6. The shop **updates progress** with +/- counters; everyone watching the same robot sees changes live.
+7. **Order COTS parts** with FRCTools Orders or **download CAD** for in-house manufacturing.
+8. **Dashboards** show completion rings, recent finishes, and what's currently being made.
 
 ---
 
-## **What You’ll Learn**
+## Who is it for?
 
-Through this documentation, you will learn:
-
-- **How to Set Up Your Team Account**: Register, log in, and configure your system.
-- **How to Use the Dashboard**: Explore filtering, sorting, and updating parts.
-- **How to Fetch BOM Data from Onshape**: Step-by-step instructions for importing parts.
-- **How to Manage Production Processes**: Track parts from start to finish.
-- **Best Practices**: Tips to optimize your team's use of the platform.
+- **Build leads** who need a single source of truth.
+- **Manufacturing leads** who want to know which stage every part is in.
+- **Drive team / mentors** who want a dashboard view without diving into Onshape.
+- **Off-season** teams that want to archive last year's BOM and start a fresh robot.
 
 ---
 
-## **Next Steps**
+## What's different from a spreadsheet?
 
-Ready to begin? Head over to the **Getting Started** section to learn how to register your team, fetch your first BOM, and start managing your robot’s production like a pro!
+| Spreadsheet                              | FRC BOM                                                            |
+|------------------------------------------|--------------------------------------------------------------------|
+| Manual data entry                        | One-click import from Onshape (with subassembly recursion)         |
+| Goes stale the moment CAD changes        | Re-fetch keeps quantities synced; manual edits survive             |
+| One person edits at a time               | Real-time multi-user with Socket.IO                                |
+| No CAD link                              | 3D viewer + per-part STEP/STL/GLTF/x_t download                    |
+| No vendor grouping                       | FRCTools Orders integration, CSV export per vendor                 |
+| No celebration when a part is done       | Confetti modal + live "now making" feed                            |
 
 ---
 
-**Happy Building! 🚀**  
-**~ The FRC BOM Team**  
+## Next steps
+
+- [Try the demo →](demo.md) (no signup needed)
+- [Get started step-by-step →](getStarted.md)
+- [See the full feature list →](features.md)
+
+**Happy Building! 🚀**
+**~ The FRC BOM Team**

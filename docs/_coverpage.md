@@ -2,7 +2,10 @@
 
 # FRC BOM Docs
 
-> Complete documentation FRCBOM.com
+> The complete reference for [FRCBOM.com](https://frcbom.com)
 
-[Get Started](getStarted)
+Track every part from CAD to competition. Built for FRC teams.
 
+[Get Started](getStarted.md)
+[Try a Demo](demo.md)
+[See Features](features.md)

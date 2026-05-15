@@ -1,0 +1,156 @@
+# Auto-Generated FeatureScript
+
+The one-click way to get your team's materials and machines into Onshape.
+
+---
+
+## What it does
+
+When you click **Make / Update FeatureStudio** in [Team Settings](teamSettings.md), FRC BOM:
+
+1. Reads your **machines** (split by stage) and **materials** (with category order).
+2. Generates a single Onshape FeatureScript file with **two features**:
+   - **`setMaterial`** — a dropdown of every material grouped by category.
+   - **`setProcesses`** — three dropdowns (Pre Process / Process 1 / Process 2), populated from your machines.
+3. **Either** creates a new Onshape document in your folder (named `FRCBOM_{team_number}_FS`) **or** updates the existing FeatureStudio tab in-place.
+4. (Optional) Creates an Onshape **Version** so you can roll back from Onshape's history if needed.
+5. Persists the doc/workspace/element IDs so the next click updates the same place.
+
+You never paste FeatureScript code by hand.
+
+---
+
+## Prerequisites
+
+- Onshape API keys saved in Team Settings (see [Onshape API Keys →](onshapeAPI.md)).
+- An **Onshape Folder URL** where the FRCBOM document should live (paste it in Team Settings).
+- At least one machine and one material defined.
+- (Optional) Custom Property IDs filled in — see [Custom Property IDs →](propertyIds.md).
+
+---
+
+## How to run it
+
+1. Open **Team Settings**.
+2. In the **Onshape FeatureStudio** card, confirm folder URL + keys.
+3. Click **Make / Update FeatureStudio**.
+4. Watch the status line:
+   - First run: `Created FeatureStudio in your folder`.
+   - Subsequent runs: `Updated existing FeatureStudio`.
+5. Click **Open FS** to jump to the tab in Onshape.
+
+---
+
+## What the generated FS looks like
+
+(Simplified example — real output includes property IDs and grouping logic.)
+
+```featurescript
+FeatureScript 2506;
+import(path : "onshape/std/common.fs", version : "2506.0");
+
+// ---- Machines ----
+enum PreProcessType {
+    Saw;
+    Jigsaw;
+    Drilling;
+}
+enum ProcessType {
+    CNC;
+    Lathe;
+    Mill;
+    Printer3D;
+    Welding;
+}
+const PREPROCESS_NAME_MAP = {
+    PreProcessType.Saw      : "Saw",
+    PreProcessType.Jigsaw   : "Jigsaw",
+    PreProcessType.Drilling : "Drilling"
+}
+const PROCESS_NAME_MAP = {
+    ProcessType.CNC       : "CNC",
+    ProcessType.Lathe     : "Lathe",
+    // …
+}
+
+// ---- Material features generated from your team's categorized materials ----
+// ---- setProcesses + setMaterial features with property writes ----
+```
+
+The actual generator code is in `OnshapeAPIDocument.generate_combined_fs_code(...)`. It:
+
+- Sanitises machine/material names into valid FS identifiers.
+- Quotes strings safely.
+- Picks property IDs from your team settings; falls back to embedded defaults if blank.
+
+---
+
+## Using the features in a Part Studio
+
+1. In any Part Studio inside your team's Onshape documents, click **+** to add a custom feature.
+2. Pick **setMaterial** → select the part → pick the material.
+3. Pick **setProcesses** → select the part → set Pre Process / Process 1 / Process 2.
+4. Apply your BOM template (if not auto-applied). The columns populate.
+5. Fetch the BOM in FRC BOM and see the values flow through.
+
+---
+
+## Updating the FS
+
+Whenever you change **machines** or **materials** in Team Settings, just click **Make / Update FeatureStudio** again. The existing FeatureStudio tab is rewritten in place. No need to re-share with the team.
+
+> Onshape may automatically rebuild features that use the FS once you update it. Worst case, users see a "feature needs rebuilding" warning and can hit ⟳ in the toolbar.
+
+---
+
+## Optional: create a Version on update
+
+If you tick **Create a Version after update** (when the flag is enabled) FRC BOM also calls Onshape's version endpoint with a descriptive name (`FRCBOM 5987 — 2025-03-12 14:22 UTC` by default). You'll find the version in Onshape's history; older builds can pin to it.
+
+---
+
+## API
+
+```
+POST /api/settings/make_fs
+Body:
+{
+  "team_number": "5987",
+  "folder_url":  "https://cad.onshape.com/documents?nodeId=…",
+  "create_version": false,
+  "version_name":  ""
+}
+```
+
+Auth: team admin of this team or global admin. Returns:
+```json
+{
+  "message": "Updated existing FeatureStudio",
+  "fs_doc_id": "…",
+  "fs_workspace_id": "…",
+  "fs_element_id": "…",
+  "version_id": "…",       // only if create_version=true
+  "version_name": "…"
+}
+```
+
+Errors include `502` with `details.body` from Onshape, so you can debug scope / permission issues directly.
+
+---
+
+## Comparison with the manual approach
+
+| Step                              | Manual                                | Auto-generated                   |
+|-----------------------------------|---------------------------------------|----------------------------------|
+| Create custom properties          | You do, in Classroom Settings         | Optional (use defaults)          |
+| Author FeatureScript              | Copy → modify property IDs            | Generated by FRC BOM             |
+| Apply BOM template                | Manual                                | Manual (once per assembly)       |
+| Update on new machine/material    | Edit FS code by hand                  | Click "Make / Update FS"         |
+| Track versions                    | Manual                                | Built-in via Onshape versioning  |
+
+---
+
+**Next:**
+- [Custom Property IDs →](propertyIds.md)
+- [FeatureScript Setup (Manual) →](FeatureScriptSetup.md)
+- [Onshape API Keys →](onshapeAPI.md)
