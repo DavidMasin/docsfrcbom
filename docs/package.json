@@ -1,0 +1,13 @@
+{
+  "name": "frcbom-docs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Docsify-powered documentation site for frcbom.com. Pure static HTML — the build step is a no-op.",
+  "scripts": {
+    "build": "echo 'no build step required for docsify (static HTML)'",
+    "start": "serve --no-clipboard --listen ${PORT:-8080} ."
+  },
+  "dependencies": {
+    "serve": "14.2.4"
+  }
+}
