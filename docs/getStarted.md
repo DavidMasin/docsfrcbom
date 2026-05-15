@@ -1,161 +1,206 @@
-### If any assistance is needed, contact me @DavidMasin in Cheif Delphi (you can DM me)
+# Getting Started
 
-# **FRC BOM System - Documentation**
+> Need help? DM **@DavidMasin** on Chief Delphi.
 
----
-
-## **Getting Started**
-
-Welcome to the FRC BOM System! This guide will help you get started using the platform to manage your robot’s manufacturing processes. Follow these steps to register, log in, and manage your team's parts efficiently.
+This guide walks you through everything from your first visit to your first fully-tracked BOM.
 
 ---
 
-### **📋 Step 1: Register Your Team**
+## TL;DR (Fastest path)
 
-1. **Navigate to the Website**  
-   Open the website [frcbom.com](https://frcbom.com/#signInForm) in your preferred browser.
-
-2. **Click "Register"**
-   - On the login page, click the **Register** button to create an account.
-
-3. **Enter Team Details**
-   - **Team Number:** Enter your official FRC team number.
-   - **Password:** Choose a strong password for your team.
-   - **Admin Password:** Choose a strong password for your team's admin account.
-
-4. **Submit Registration**
-   - Click **Register** to create your team account.
-   - ✅ A success message will appear upon successful registration.
+1. Go to **[frcbom.com](https://frcbom.com)**.
+2. Click **🚀 Try a Demo** to get a throw-away admin account for 24 hours, **or** click **Register**.
+3. In **Team Settings**, add your **Onshape API keys**, **machines**, and **materials**.
+4. Click **Make / Update FeatureStudio** to auto-build the Onshape FeatureStudio your team will use.
+5. Apply the *FRCBOM* properties in Onshape, then **Create a Robot** → **Add a System** → **Fetch BOM**.
+6. Share the team URL with your team. They log in as the **User** password and start updating progress.
 
 ---
 
-### **🔐 Step 2: Log In**
+## Step 1 — Visit the site
 
-1. **Go to the Login Page**  
-   Visit the login page at [frcbom.com](https://frcbom.com/#signInForm).
+Open **[frcbom.com](https://frcbom.com)** in any modern browser. The landing page has:
 
-2. **Enter Credentials**
-   - **Team Number:** Enter your registered team number.
-   - **Password:** Enter your account password (either User or Admin).
-
-3. **Click "Log In"**
-   - Upon successful login, you will be redirected to your team-specific dashboard:  
-     `frcbom.com/{team_number}` OR `frcbom.com/{team_number}/Admin` (if logged in with an Admin account).
+- A **Sign in** card (right side).
+- A **🚀 Try a Demo** button.
+- A **Register** link in the top nav.
+- A **Features** + **How it works** scroll section.
 
 ---
 
-### **💻 Step 3: Using the Dashboard**
+## Step 2 — Get an account
 
-After logging in, you’ll see the main dashboard where you can manage your BOM (Bill of Materials).
+You have three options:
 
-#### **Dashboard Overview**
+### Option A: Demo Team (recommended for evaluation)
+Click **🚀 Try a Demo**. A modal pops up with:
+- A randomly assigned 9-digit team number
+- An auto-generated **admin password**
+- An auto-generated **user password**
+- A **Copy All** button and **Go to Admin** to jump straight in
 
-| **Section**            | **Description**               |
-|------------------------|-------------------------------|
-| **Header**             | Displays your team number and the log-out button. |
-| **Dashboard Controls** | Contains buttons for filtering and managing parts. |
-| **BOM Table**          | Displays all parts required for manufacturing. |
+The demo team **auto-deletes after 24 hours**. See [Demo Team →](demo.md).
 
----
+### Option B: Register a real team
+Click **Register**, then provide:
 
-### **📦 Step 4: Managing Your BOM**
+| Field            | Required | Notes                                               |
+|------------------|----------|-----------------------------------------------------|
+| Team Number      | yes      | Your official FRC team number (e.g. `5987`).        |
+| Team Name        | yes      | Display name (e.g. *Galaxia*).                      |
+| Password         | yes      | Used by builders/students.                          |
+| Admin Password   | yes      | Used by leads/mentors. Required for editing config. |
 
-#### **1. Create a New Robot - TEAM ADMIN ONLY**
-1. Enter your new robot's name.
-2. Click **OK**.
-3. You will be redirected to:  
-   `frcbom.com/{team_number}/Admin/{robot_name}`.
+> Passwords must be **at least 8 characters** and include **upper-case, lower-case, and a digit** (enforced when you change credentials).
 
----
+### Option C: Already registered
+Click **Sign in**. Enter your **Team Number** and **either** the user or admin password. The system detects which one you used and routes you to the right view:
 
-#### **2. Use the Custom FeatureScript in Onshape**
-Before fetching your BOM, you **must use the custom FeatureScript in Onshape** to set the processes for each part.
-
-1. **Add the Custom FeatureScript:**
-   - In your Onshape CAD document, add the FRC BOM FeatureScript from this document, [setProcesses](https://cad.onshape.com/documents/2ab53c1cecf1cb8d258c9308/w/d6c4bbfad44d288bc9cdc221/e/c0f603bee2bd62b76af7d8ac), and this FeatureScript (to set materials, not necessary) - [SetMaterials](https://cad.onshape.com/documents/2ab53c1cecf1cb8d258c9308/w/d6c4bbfad44d288bc9cdc221/e/c0f603bee2bd62b76af7d8ac).
-
-2. **Set the Processes:**
-   - Open the BOM FeatureScript in your Onshape assembly.
-   - For each part, set the following processes:
-      - **Pre-Process** (if needed)
-      - **Process 1** (main process, e.g., CNC, Lathe, 3D Printing)
-      - **Process 2** (secondary process if applicable)
-
-3. **Save and Update:**
-   - Save your Onshape document after defining processes.
-   - This will allow the BOM system to read the correct processes when fetching your BOM.
-
-> **Need help adding the FeatureScript?** Check out the [FeatureScript Setup Guide](FeatureScriptSetup.md).
+- **User password** → `/{team_number}` (read + progress-update only)
+- **Admin password** → `/{team_number}/Admin` (full configuration)
 
 ---
 
-#### **3. Fetch BOM from Onshape - TEAM ADMIN ONLY**
-> :warning:  I suggest not fetching into the "Main" System!
-1. Select the system you want to fetch into the BOM
-2. Click **Settings** in the header.
-2. Enter the following details:
+## Step 3 — First-time admin checklist
 
-   - **Onshape Document URL:** Link to your Onshape document.
-   - **Access Key:** Your Onshape API access key.
-   - **Secret Key:** Your Onshape API secret key.
+Sign in with the **admin** password. You land on the **Robot Fleet** page (`/{team_number}/Admin`). Before fetching any BOM, set up the team-wide pieces in **⚙️ Team Settings** (link in the top bar).
 
-3. Click **Fetch BOM**.
+### 3a. Machines
+Add every machine in your shop. Each machine has:
 
-> **Note:** This action retrieves BOM data from Onshape and displays it in the BOM table.
+| Property     | Example     | What it does                                          |
+|--------------|-------------|--------------------------------------------------------|
+| Name         | `CNC Mill`  | Display name; appears in the FeatureStudio dropdowns. |
+| CAD Format   | `STEP`      | Default download format when a builder grabs a part.   |
+| Stage        | `Process`   | `Process` or `PreProcess`. Drives Pre/Process columns.|
 
-> **Having trouble generating Onshape API keys?** Visit this [link](onshapeAPI.md).
+> **Stage matters.** Machines flagged `PreProcess` populate the *Pre Process* dropdown in Onshape; everything else populates *Process 1* / *Process 2*.
 
----
+### 3b. Materials
+Group materials into **categories** (e.g. *Sheet*, *Tube*, *Bar*) and add items inside each. You can reorder both categories and items with ↑ / ↓ — the order is preserved in the auto-generated FeatureScript so your team sees a logical dropdown.
 
-#### **4. Viewing and Filtering Parts**
+### 3c. Onshape FeatureStudio
+1. Paste your **Onshape Folder URL** (the folder where you want FRC BOM to create the FeatureStudio document).
+2. Paste your **Access Key** and **Secret Key** (see [Onshape API Keys →](onshapeAPI.md)).
+3. (Optional) Paste **custom property IDs** if you've already created Material / PreProcess / Process 1 / Process 2 properties (see [Custom Property IDs →](propertyIds.md)).
+4. Click **Save Onshape Settings**, then **Make / Update FeatureStudio**.
 
-Use the filter buttons in the **Dashboard Controls** section to view specific parts:
+FRC BOM will create (or update) a document called `FRCBOM_{team_number}_FS` inside your folder, containing one Feature Studio tab named **FRCBOM Settings**. That tab now has:
+- A `setMaterial` feature with your materials grouped by category
+- A `setProcesses` feature with your machines split into PreProcess / Process
 
-- **Show All** → Displays all parts.
-- **Show In-House** → Displays only in-house manufactured parts.
-- **Show COTS** → Displays commercial off-the-shelf parts.
-
-**Filter by Process:**
-- 🛠️ **CNC**
-- ⚙️ **Lathe**
-- 🖨️ **3D Printer**
-- ✂️ **Gerung**
-- 🏭 **Mill**
+Use those features inside any Part Studio to tag parts. See [Auto-Generated FeatureScript →](autoFeatureScript.md).
 
 ---
 
-#### **5. Managing Part Quantities**
+## Step 4 — Create a robot
 
-Each part (In-House only) in the BOM has quantity counters for the following stages:
+From **/{team_number}/Admin**, click **Add New Robot**:
 
-- **Pre-Process Quantity**
-- **Process 1 Quantity**
-- **Process 2 Quantity**
+| Field                 | Example       | Notes                                            |
+|-----------------------|---------------|--------------------------------------------------|
+| Robot Name            | `Valkyrie`    | URL-safe display name.                           |
+| Competition Year      | `2025`        | Defaults to current season.                      |
+| Robot Schematic Image | *(file)*      | Optional. Used as a card thumbnail.              |
 
-**To Update Quantities:**
-
-1. Click the part you want to update.
-2. Use the `+` or `-` buttons next to the part’s process field.
-3. The BOM updates automatically and saves data locally and on the server.
+You land on the **robot detail** page (`/{team_number}/Admin/{robot_name}`). Click **🖼 Set main assembly image** to point the card image at an Onshape assembly thumbnail instead of a static upload.
 
 ---
 
-### **💾 Step 6: Saving Your Progress**
+## Step 5 — Add systems
 
-Your BOM data is saved automatically whenever you update it.
+A robot has one or more **systems**, plus an automatic **Main** view.
+
+Click **➕ Add System**. Provide:
+
+| Field           | Required | Notes                                              |
+|-----------------|----------|----------------------------------------------------|
+| System Name     | yes      | E.g. *Intake*, *Drivetrain*. **`Main` is reserved.** |
+| Assembly URL    | no       | Onshape assembly URL — can be set later.           |
+| Thumbnail URL   | no       | Optional preview image.                            |
+
+> Tip: keep one system per Onshape assembly. The **Main** view aggregates all systems automatically; **do not fetch into Main**.
 
 ---
 
-### **🔓 Step 7: Logging Out**
+## Step 6 — Configure each system & fetch the BOM
 
-1. Click **Log Out** in the header.
-2. This action clears your session and returns you to the login page.
+Open a system to land on its BOM page (`/{team_number}/Admin/{robot_name}/{system}`). Click **⚙️ Edit System Settings**:
+
+| Field               | Required | Notes                                                  |
+|---------------------|----------|--------------------------------------------------------|
+| Assembly URL        | yes      | Onshape assembly URL for *this* system.                |
+| Subassembly URLs    | no       | Add any subassembly that should be expanded with multipliers. |
+| Part Studio URLs    | recommended | Needed for CAD download & GLTF viewer (locate parts by ID). |
+| Access Key          | yes      | Defaults to team-level key.                            |
+| Secret Key          | yes      | Defaults to team-level key.                            |
+
+Click **🔄 Fetch BOM**. FRC BOM will:
+
+1. Pull the assembly BOM from Onshape.
+2. Walk each subassembly URL you listed and multiply its parts by the parent assembly quantity.
+3. Merge results, removing duplicates that already appear inside an expanded subassembly.
+4. Apply any **deleted** flags and append any **manual parts**.
+5. Persist the unified BOM and snap an updated thumbnail.
+
+The page reloads and shows part cards.
 
 ---
 
-## **🎉 You're Ready!**
+## Step 7 — Track manufacturing progress
 
-With these steps, you're ready to manage your team's BOM and track your robot’s parts from CAD to completion!
+Each part card shows quantity counters for **Pre-Process**, **Process 1**, and **Process 2**, plus an **Available** counter. Builders log in with the **user password** and:
 
-**Happy Building! 🚀**  
+- Tap **+ / −** to update quantities (saved to the server, broadcast to everyone via Socket.IO).
+- Click a part to open the **part detail view** (notes, CAD download).
+- Open the 3D viewer to verify the right part.
+
+When a part hits its target, a confetti modal pops up on the dashboard for everyone watching the robot.
+
+See [Tracking Parts →](trackingParts.md) and [Dashboards →](dashboards.md).
+
+---
+
+## Step 8 — Filter, find, and download
+
+On any system BOM page you can:
+
+- **Filter:** All Parts / COTS / In-House
+- **Filter by material:** dropdown of every material that appears in this BOM
+- **Bulk material download:** pick a material → grab all CAD files in that material
+- **Add Manual Part:** for things that aren't in Onshape
+- **Delete a part:** soft-delete; one click to restore
+- **Order Mode** (COTS only): map parts to FRCTools Orders products and export per-vendor CSVs
+
+See [BOM Management →](bomManagement.md) and [FRCTools Orders →](orders.md).
+
+---
+
+## Step 9 — Share with your team
+
+Send your teammates:
+
+1. **Team URL:** `https://frcbom.com/{team_number}`
+2. **User password** (not the admin password)
+
+They can log in and update part counts but cannot change settings, delete systems, or fetch BOM. See [Team Dashboard (User) →](TeamDashboard.md).
+
+---
+
+## Step 10 — Logout & switch
+
+Click **Log Out** in the top bar. It clears the JWT cookie and returns you to the landing page. To log in as a different role, just sign in with the appropriate password.
+
+---
+
+## You're ready! 🎉
+
+Next reads:
+- [Demo Team](demo.md)
+- [Team Admin Dashboard](TeamAdminDashboard.md)
+- [Team Settings](teamSettings.md)
+- [Onshape API Keys](onshapeAPI.md)
+- [FeatureScript Setup](FeatureScriptSetup.md)
+
+**Happy Building! 🚀**
 **~ The FRC BOM Team**

@@ -1,3 +1,5 @@
 * [Home](/)
-* [Introduction](introduction.md)
+* [Get Started](getStarted.md)
+* [Features](features.md)
+* [API](api.md)
 * [FRCBOM.com](https://frcbom.com/)
